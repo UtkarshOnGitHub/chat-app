@@ -9,18 +9,19 @@ import {
   Image,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getChat } from '../store/action';
 
 const getConvo = async(userId)=>{
-    return await axios.get("http://localhost:8080/conversation/"+userId)
+    return await axios.get("https://chatappbackend-production-2ce5.up.railway.app/conversation/"+userId)
 }
   
-const SidebarContent = ({ onClose ,...rest}) => {
+const SidebarContent = ({ onClose ,user,...rest}) => {
 
     const [active , setActive] = useState("")
-    const user = "63fa0361b03732f0f970fc94"
+    console.log(user)
     const [conversation , setConversation] = useState(null);
+
     useEffect(()=>{
       try {
         getConvo(user).then((res)=>{
@@ -29,11 +30,12 @@ const SidebarContent = ({ onClose ,...rest}) => {
       } catch (error) {
         console.log(error)
       }
-    },[])
+    },[user])
 
     const activeStateChange =(id)=>{
       setActive(id)
     }
+
 
 
     return (
@@ -57,7 +59,6 @@ const SidebarContent = ({ onClose ,...rest}) => {
 
 
   const NavItem = ({ data , currUser , active ,activeStateChange, ...rest }) => {
-
     const dispatch = useDispatch();
     const [friends , setFriends] = useState({});
     

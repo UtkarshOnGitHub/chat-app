@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   IconButton,
   Box,
-  CloseButton,
   Flex,
-  Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
@@ -19,26 +16,29 @@ import {
 import Message from "./Message"
 
 import SidebarContent from './SidebarContent';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../store/users/action';
+import { AppContext } from '../Context/ContextProvider';
 
 
 
 export default function Chat() {
-  const user = "63fa0361b03732f0f970fc94"
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-
+  const { token } = useContext(AppContext)
+  let user = token._id;
   const chat = useSelector((store)=>store.chat);
-
-
+  
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box minH="100vh" bg='gray.100'>
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: 'none', md: 'block' }} />
-      <Drawer autoFocus={false}isOpen={isOpen}placement="left"onClose={onClose}returnFocusOnClose={false}onOverlayClick={onClose}size="full">
+        display={{ base: 'none', md: 'block' }} user ={user} />
+      <Drawer autoFocus={false}isOpen={isOpen}placement="left" 
+      onClose={onClose}
+      returnFocusOnClose={false} 
+      onOverlayClick={onClose} size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent onClose={onClose} user={user}/>
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}

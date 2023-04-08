@@ -20,7 +20,7 @@ import axios from 'axios';
 
 
 const sendOTP = async (data) => {
-  return await axios.post("http://localhost:8080/user/forgetPassword", {
+  return await axios.post("https://chatappbackend-production-2ce5.up.railway.app/user/forgetPassword", {
     email: data,
   });
 };

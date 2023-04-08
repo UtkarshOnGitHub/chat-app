@@ -8,7 +8,7 @@ const Message = ({chat=[] , currUser}) => {
 
   const [message , setMessage] = useState("");
   const [state , setState] = useState(false)
-
+  console.log(chat)
   const scrollref = useRef()
   const initalState ={
     conversationId:chat[0]?.conversationId,
@@ -17,9 +17,9 @@ const Message = ({chat=[] , currUser}) => {
   }
   const handleSendMessage = async()=>{
     try {
-      let res = await axios.post("http://localhost:8080/message",initalState)
-      console.log(res)
+      await axios.post("https://chatappbackend-production-2ce5.up.railway.app/message",initalState)
       setState(!state)
+      setMessage("")
     } catch (error) {
       console.log(error)
     }
@@ -51,7 +51,7 @@ const Message = ({chat=[] , currUser}) => {
         <Box w="100%" textAlign={"center"}><Text color={"grey"} as={"em"} fontSize={"6xl"}>Click On Friends To Open A Conversation</Text></Box>
         }
         <Box position={"absolute"} bottom={0} w="100%" display={"flex"} justifyContent={"center"} alignContent={"center"}>
-            <Textarea bg={"white"} w="100%" placeholder='Type Your Message' onChange={(e)=>{setMessage(e.target.value)}}></Textarea>
+            <Textarea bg={"white"} w="100%" placeholder='Type Your Message' value={message} onChange={(e)=>{setMessage(e.target.value)}}></Textarea>
             <Button variant={"outline"} bg="green.600" color={"white"} _hover={{bg:"green.900"}} w="100px" h="80px" onClick={handleSendMessage}>Send</Button>
         </Box>
     </Box>

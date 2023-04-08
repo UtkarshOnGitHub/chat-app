@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 const setUser = async(data)=>{
     console.log(data)
-    return await axios.post("http://localhost:8080/user/signup", data)
+    return await axios.post("https://chatappbackend-production-2ce5.up.railway.app/user/signup", data)
 }
   
 export default function Signup() {

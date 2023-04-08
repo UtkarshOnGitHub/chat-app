@@ -7,15 +7,18 @@ import {BrowserRouter} from "react-router-dom"
 import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import ContextProvider from './Context/ContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     <ChakraProvider>
       <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <ContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+      </ContextProvider>
       </Provider>
     </ChakraProvider>
   // </React.StrictMode>

@@ -10,11 +10,8 @@ import {
   Stack,
   Image,
   useToast,
-  HStack,
-  PinInput,
-  PinInputField,
 } from "@chakra-ui/react";
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../store/users/action";
@@ -28,6 +25,8 @@ export default function Login() {
   const [handleToken , setHandleToken] = useState(false)
   const toast = useToast();
   const dispatch = useDispatch()
+
+
   const initialForm = {
     email: email,
     password: password,
@@ -37,13 +36,11 @@ export default function Login() {
 
 
   const token = useSelector((store)=>store.user)
-
-  console.log(token)
   const redirect = useNavigate();
 
   useEffect(()=>{
-    if (token?.data?.message ==="Token Generated") {
-      sessionStorage.setItem("token", token?.data?.token);
+    if (token?.state?.data?.message ==="Token Generated") {
+      sessionStorage.setItem("token", token?.state?.data?.token);
       toast({
         title: "LogIn SuccessFull",
         description: "We Have succefully Logged You In.",
@@ -52,7 +49,7 @@ export default function Login() {
         isClosable: true,
       });
       redirect("/chat")
-    } else if(token?.data == "Sorry We Couldnt Find Any Regeistered Email") {
+    } else if(token?.state?.data == "Sorry We Couldnt Find Any Regeistered Email") {
       toast({
         title: "Invalid Email",
         description: "We Didin't Find This Email in our Database.",
@@ -60,7 +57,7 @@ export default function Login() {
         duration: 4000,
         isClosable: true,
       });
-    }else if(token?.data == "Invalid Credentials"){
+    }else if(token?.state?.data == "Invalid Credentials"){
       toast({
         title: "Invalid Credentials",
         description: "Enter Valid Credentials!",
