@@ -37,6 +37,9 @@ const Message = ({chat=[] , currUser}) => {
         borderRadius={"20px"}
         className={style.messageScroll}
          backgroundImage={"https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png"}  >
+            <Box textAlign={"center"}>
+              <Text color={"grey"} fontSize={"17px"}>This Chat Is End To End Encrypted</Text>
+            </Box>
             {chat?.map((e)=>{
               return(
                 <Box ref={scrollref}>

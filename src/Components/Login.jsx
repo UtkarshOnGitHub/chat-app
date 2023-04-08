@@ -15,49 +15,64 @@ import {
   PinInputField,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginUser } from "../store/users/action";
+import { useNavigate } from "react-router-dom";
 
-const setLogin = async (data) => {
-  return await axios.post("http://localhost:8080/user/login", data);
-};
 
-
-let sessionToken = sessionStorage.getItem("token") || null;
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [handleToken , setHandleToken] = useState(false)
   const toast = useToast();
-
-
+  const dispatch = useDispatch()
   const initialForm = {
     email: email,
     password: password,
   };
 
 
+
+
+  const token = useSelector((store)=>store.user)
+
+  console.log(token)
+  const redirect = useNavigate();
+
+  useEffect(()=>{
+    if (token?.data?.message ==="Token Generated") {
+      sessionStorage.setItem("token", token?.data?.token);
+      toast({
+        title: "LogIn SuccessFull",
+        description: "We Have succefully Logged You In.",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+      redirect("/chat")
+    } else if(token?.data == "Sorry We Couldnt Find Any Regeistered Email") {
+      toast({
+        title: "Invalid Email",
+        description: "We Didin't Find This Email in our Database.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+    }else if(token?.data == "Invalid Credentials"){
+      toast({
+        title: "Invalid Credentials",
+        description: "Enter Valid Credentials!",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  },[token])
+  
   const handleLogin = () => {
-    setLogin(initialForm).then((res) => {
-      console.log(res);
-      if (res.data.message == "Token Generated") {
-        sessionStorage.setItem("token", res.data.token);
-        toast({
-          title: "LogIn SuccessFull",
-          description: "We Have succefully Logged You In.",
-          status: "success",
-          duration: 4000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Invalid Credentials",
-          description: "We Didin't Find these creds in our Database.",
-          status: "error",
-          duration: 4000,
-          isClosable: true,
-        });
-      }
-    });
+    dispatch(LoginUser(initialForm));
   };
 
 

@@ -13,11 +13,6 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
   FiMenu,
 } from 'react-icons/fi';
 
@@ -28,9 +23,8 @@ import { useSelector } from 'react-redux';
 
 
 
-
 export default function Chat() {
-  const user = "63fa029ab03732f0f970fc8e";
+  const user = "63fa0361b03732f0f970fc94"
   const { isOpen, onOpen, onClose } = useDisclosure();
 
 
