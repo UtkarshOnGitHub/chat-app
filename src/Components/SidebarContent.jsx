@@ -3,30 +3,26 @@ import {
   Box,
   CloseButton,
   Flex,
-  Icon,
-  useColorModeValue,
-  Link,
 
+  useColorModeValue,
   Text,
   Image,
 } from '@chakra-ui/react';
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-} from 'react-icons/fi';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getChat } from '../store/action';
 
 const getConvo = async(userId)=>{
     return await axios.get("http://localhost:8080/conversation/"+userId)
-  }
+}
   
 
 const SidebarContent = ({ onClose ,...rest}) => {
-    const user = "63fa0361b03732f0f970fc94";
-    const [conversation , setConversation] = useState(null)
+    const user = "63fa029ab03732f0f970fc8e";
+    const [conversation , setConversation] = useState(null);
+
+
+    
   
     useEffect(()=>{
       try {
@@ -42,7 +38,7 @@ const SidebarContent = ({ onClose ,...rest}) => {
       <Box bg={useColorModeValue('white', 'gray.900')}borderRight="1px"borderRightColor={useColorModeValue('gray.200', 'gray.700')}w={{ base: 'full', md: 60 }}pos="fixed"h="full"{...rest}>
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-            Logo
+            ChatBap
           </Text>
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
@@ -54,8 +50,10 @@ const SidebarContent = ({ onClose ,...rest}) => {
   };
 
 
-  const NavItem = ({ data,currUser, ...rest }) => {
+  const NavItem = ({ data , currUser , ...rest }) => {
+    const dispatch = useDispatch();
     const [friends , setFriends] = useState({})
+
     useEffect(()=>{
         let friendId = data?.members?.find((e)=>{
             return e != currUser
@@ -70,8 +68,12 @@ const SidebarContent = ({ onClose ,...rest}) => {
 
     },[])
 
+    const handleFriends = (id)=>{
+        dispatch(getChat(id))
+    }
+
     return (
-      <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+      <Box onClick={()=>handleFriends(data?._id)}>
         <Flex align="center"p="4" mx="4"   borderRadius="lg"role="group" gap="10px" cursor="pointer" _hover={{
             bg: 'cyan.400',
             color: 'white',
@@ -79,7 +81,7 @@ const SidebarContent = ({ onClose ,...rest}) => {
             <Image w="32px" h="32px" borderRadius={"50%"} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVmqw3Cr7IQM-oR1ebavbVUJ7x5xkvYBPrBZEEs2IqGDpPuNlXQIQUHpRo3wn88ZEKiEs&usqp=CAU"></Image>
             <Text>{friends?.username}</Text>
         </Flex>
-      </Link>
+      </Box>
     );
   };
   

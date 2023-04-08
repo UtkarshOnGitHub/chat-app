@@ -22,26 +22,21 @@ import {
 } from 'react-icons/fi';
 
 import Message from "./Message"
-import axios from 'axios';
+
 import SidebarContent from './SidebarContent';
-
-const LinkItems = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
-];
+import { useSelector } from 'react-redux';
 
 
-const getConvo = async(userId)=>{
-  return await axios.get("http://localhost:8080/conversation/"+userId)
-}
+
 
 export default function Chat() {
-  const user = "63fa0361b03732f0f970fc94";
-
+  const user = "63fa029ab03732f0f970fc8e";
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+
+  const chat = useSelector((store)=>store.chat);
+
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
@@ -54,13 +49,31 @@ export default function Chat() {
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+
+{/* ------------------------------------------------------------------------ */}
+
       {/* Content */}
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Message/>
+        <Message chat={chat.data}  currUser ={user}/>
       </Box>
     </Box>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -86,7 +99,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
+        ChatBap
       </Text>
     </Flex>
   );

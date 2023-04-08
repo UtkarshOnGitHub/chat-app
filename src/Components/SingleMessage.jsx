@@ -1,8 +1,8 @@
 import { Box, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import style from "./singleMessage.module.css"
-
-const SingleMessage = ({text,own}) => {
+import {format} from "timeago.js"
+const SingleMessage = ({text,createdAt,own}) => {
   return (
     <>
         <Box className={own ? style.messageBody:style.messageBody2}>
@@ -14,7 +14,7 @@ const SingleMessage = ({text,own}) => {
                     <Box padding={"7px 15px"} borderRadius={"20px"} bgColor={own ? "#1877f2":"lightGrey"} color={own ? "white":"black"}>
                         <Text fontSize={"17px"}>{text}</Text>
                     </Box>
-                    <Text fontSize={"10px"} marginRight={"10px"} color={"grey"} marginTop={"3px"}>56 Mins ago</Text>
+                    <Text fontSize={"10px"} marginRight={"10px"} color={"grey"} marginTop={"3px"}>{format(createdAt)}</Text>
                 </Box>
         </Box>
     </>
