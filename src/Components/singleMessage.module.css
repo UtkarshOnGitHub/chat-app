@@ -1,0 +1,11 @@
+.messageBody{
+    
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 20px;
+}
+.messageBody2{
+    display: flex;
+    margin-top: 20px;
+    padding: 10px;
+}
