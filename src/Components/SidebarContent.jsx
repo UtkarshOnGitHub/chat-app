@@ -68,7 +68,7 @@ const SidebarContent = ({ onClose ,user,...rest}) => {
             return e != currUser
         })
         try {
-            axios.get("http://localhost:8080/user/"+friendId).then((res)=>{
+            axios.get("https://chatappbackend-production-2ce5.up.railway.app/user/"+friendId).then((res)=>{
                 setFriends(res.data)
             }) 
         } catch (error) {
