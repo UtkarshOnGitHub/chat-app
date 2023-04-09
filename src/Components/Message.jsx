@@ -33,8 +33,9 @@ const Message = ({chat=[] , currUser}) => {
 
   return (
     <>
-    <Box marginTop={"50px"} height={"86vh"} position={'relative'} >
-        {chat.length!=0 ? <Box h={"86%"} 
+    {chat.length!=0 ?
+    <Box marginTop={["0","50px"]} height={"86vh"} position={'relative'} >
+        <Box h={"86%"} 
         w="100%" overflow={"scroll"} padding={"5px 10px"} 
         borderRadius={"20px"}
         className={style.messageScroll}
@@ -49,14 +50,15 @@ const Message = ({chat=[] , currUser}) => {
                 </Box> 
               ) 
             })}
-        </Box> : 
-        <Box w="100%" textAlign={"center"}><Text color={"grey"} as={"em"} fontSize={"6xl"}>Click On Friends To Open A Conversation</Text></Box>
-        }
-        <Box position={"absolute"} bottom={0} w="100%" display={"flex"} justifyContent={"center"} alignContent={"center"}>
-            <Textarea bg={"white"} w="100%" placeholder='Type Your Message' value={message} onChange={(e)=>{setMessage(e.target.value)}}></Textarea>
-            <Button variant={"outline"} bg="green.600" color={"white"} _hover={{bg:"green.900"}} w="100px" h="80px" onClick={handleSendMessage}>Send</Button>
+        </Box> 
+        
+        <Box position={"absolute"} w="100%" display={"flex"} justifyContent={"center"} alignContent={"center"}>
+            <Textarea bg={"white"} w="100%" borderRadius={"10px 0px 0px 10px"} placeholder='Type Your Message' value={message} onChange={(e)=>{setMessage(e.target.value)}}></Textarea>
+            <Button variant={"outline"} borderRadius={"0px 10px 10px 0px"} bg="green.600" color={"white"} _hover={{bg:"green.900"}} w="100px" h="81px" onClick={handleSendMessage}>Send</Button>
         </Box>
-    </Box>
+        </Box>:
+        <Box w="100%" textAlign={"center"}><Text color={"grey"} as={"em"} fontSize={"6xl"}>Click On Friends To Open A Conversation</Text></Box>
+   }
     </>
   )
 }

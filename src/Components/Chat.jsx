@@ -27,8 +27,11 @@ export default function Chat() {
   const dispatch = useDispatch();
   const chat = useSelector((store)=>store.chat);
   const convo = useSelector((store)=>store.conversation);
-  
-  console.log(convo)
+  const close  =(close)=>{
+    
+  }
+
+
   useEffect(()=>{
       dispatch(getConversations(token?._id));
   },[token._id])
@@ -45,7 +48,7 @@ export default function Chat() {
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }} conversation={convo?.data} user ={token._id} />
-      <Drawer autoFocus={false}isOpen={isOpen}placement="left" 
+      <Drawer autoFocus={false} isOpen={isOpen} placement="left" 
       onClose={onClose}
       returnFocusOnClose={false} 
       onOverlayClick={onClose} size="full">

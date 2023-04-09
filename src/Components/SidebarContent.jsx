@@ -17,11 +17,13 @@ import { getChat } from '../store/chat/action';
 const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
 
     const [active , setActive] = useState("");
+    const [close , setClose] = useState(false)
 
 
 
     const activeStateChange =(id)=>{
       setActive(id)
+      setClose(true)
     }
 
 
@@ -32,10 +34,10 @@ const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
             ChatBap
           </Text>
-          <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+          <CloseButton display={{ base: 'flex', md: 'none' }} />
         </Flex>
         {conversation?.map((link) => (
-          <NavItem key={link._id} data={link} active={active} activeStateChange={activeStateChange} currUser = {user}/>
+          <NavItem key={link._id} data={link} active={active} activeStateChange={activeStateChange} currUser = {user} onClose={onClose}/>
         ))}
       </Box>
     );
@@ -46,7 +48,7 @@ const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
 
 
 
-const NavItem = ({ data , currUser , active ,activeStateChange, ...rest }) => {
+const NavItem = ({ data , currUser , active ,activeStateChange, onClose,...rest }) => {
     const dispatch = useDispatch();
     const [friends , setFriends] = useState({});
     
@@ -74,8 +76,8 @@ const NavItem = ({ data , currUser , active ,activeStateChange, ...rest }) => {
     },[active])
 
     return (
-      <Box onClick={()=>handleFriends(data?._id)}>
-        <Flex align="center"p="4" mx="4" marginTop={"10px"}  borderRadius="lg"role="group" gap="10px" cursor="pointer" bg={data._id == active ?'cyan.400':"white"}
+      <Box onClick={()=>handleFriends(data?._id)} >
+        <Flex align="center"p="4" mx="4" marginTop={"10px"}  borderRadius="lg"role="group" onClick={onClose} gap="10px" cursor="pointer" bg={data._id == active ?'cyan.400':"white"}
          _hover={data.id != active?{
             bg: 'cyan.400',
             color: 'black',}:null}
