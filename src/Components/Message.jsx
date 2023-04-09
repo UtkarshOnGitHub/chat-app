@@ -8,8 +8,10 @@ const Message = ({chat=[] , currUser}) => {
 
   const [message , setMessage] = useState("");
   const [state , setState] = useState(false)
-  console.log(chat)
+  
+  
   const scrollref = useRef()
+
   const initalState ={
     conversationId:chat[0]?.conversationId,
     senderId:currUser,

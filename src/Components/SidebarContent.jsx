@@ -10,27 +10,15 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChat } from '../store/action';
+import { getChat } from '../store/chat/action';
 
-const getConvo = async(userId)=>{
-    return await axios.get("https://chatappbackend-production-2ce5.up.railway.app/conversation/"+userId)
-}
   
-const SidebarContent = ({ onClose ,user,...rest}) => {
 
-    const [active , setActive] = useState("")
-    console.log(user)
-    const [conversation , setConversation] = useState(null);
+const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
 
-    useEffect(()=>{
-      try {
-        getConvo(user).then((res)=>{
-          setConversation(res.data)
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    },[user])
+    const [active , setActive] = useState("");
+
+
 
     const activeStateChange =(id)=>{
       setActive(id)
@@ -58,7 +46,7 @@ const SidebarContent = ({ onClose ,user,...rest}) => {
 
 
 
-  const NavItem = ({ data , currUser , active ,activeStateChange, ...rest }) => {
+const NavItem = ({ data , currUser , active ,activeStateChange, ...rest }) => {
     const dispatch = useDispatch();
     const [friends , setFriends] = useState({});
     
@@ -89,7 +77,7 @@ const SidebarContent = ({ onClose ,user,...rest}) => {
       <Box onClick={()=>handleFriends(data?._id)}>
         <Flex align="center"p="4" mx="4" marginTop={"10px"}  borderRadius="lg"role="group" gap="10px" cursor="pointer" bg={data._id == active ?'cyan.400':"white"}
          _hover={data.id != active?{
-            bg: 'cyan.100',
+            bg: 'cyan.400',
             color: 'black',}:null}
             {...rest}>
             <Image w="32px" h="32px" borderRadius={"50%"} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVmqw3Cr7IQM-oR1ebavbVUJ7x5xkvYBPrBZEEs2IqGDpPuNlXQIQUHpRo3wn88ZEKiEs&usqp=CAU"></Image>

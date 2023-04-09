@@ -4,26 +4,32 @@ import { useState } from 'react';
 export const AppContext  = React.createContext();
 
 
-let auth = sessionStorage.getItem("token") || "";
+
 
 const getUser = async(data={})=>{
     return await axios.post("https://chatappbackend-production-2ce5.up.railway.app/user/byToken",data)
 }
 
-const ContextProvider = ({children}) => {
-    const [token , setToken] = useState(auth);
-    const data = {
-        token:auth
-    }
 
+let auth = sessionStorage.getItem("token") || "";
+
+const ContextProvider = ({children}) => {
+    const [token , setToken] = useState("");
     useEffect(()=>{
-        getUser(data).then((res)=>{
-            setToken(res.data)
-        })
-    },[])
+        if(token!= ""){
+            getUser({token:token}).then((res)=>{
+                setToken(res.data)
+            })
+        }
+        else{
+            setToken(auth)
+        }
+    },[token])
+
+
     return (
         <div>
-            <AppContext.Provider value={{token}}>
+            <AppContext.Provider value={{token,setToken}}>
                 {children}
             </AppContext.Provider>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   IconButton,
   Box,
@@ -16,39 +16,47 @@ import {
 import Message from "./Message"
 
 import SidebarContent from './SidebarContent';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../store/users/action';
+import {useDispatch, useSelector } from 'react-redux';
 import { AppContext } from '../Context/ContextProvider';
-
+import { getConversations } from '../store/conversation/action';
 
 
 export default function Chat() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { token } = useContext(AppContext)
-  let user = token._id;
+  const { token } = useContext(AppContext);
+  const dispatch = useDispatch();
   const chat = useSelector((store)=>store.chat);
+  const convo = useSelector((store)=>store.conversation);
   
+  console.log(convo)
+  useEffect(()=>{
+      dispatch(getConversations(token?._id));
+  },[token._id])
+
+
+  if(convo?.loading){
+    return(
+      <h1>Loading...</h1>
+    )
+  }
+
   return (
     <Box minH="100vh" bg='gray.100'>
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: 'none', md: 'block' }} user ={user} />
+        display={{ base: 'none', md: 'block' }} conversation={convo?.data} user ={token._id} />
       <Drawer autoFocus={false}isOpen={isOpen}placement="left" 
       onClose={onClose}
       returnFocusOnClose={false} 
       onOverlayClick={onClose} size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose} user={user}/>
+          <SidebarContent onClose={onClose}  conversation={convo?.data} user={token._id}/>
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
 
-{/* ------------------------------------------------------------------------ */}
-
-      {/* Content */}
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Message chat={chat.data}  currUser ={user}/>
+        <Message chat={chat.data}  currUser ={token._id}/>
       </Box>
     </Box>
   );

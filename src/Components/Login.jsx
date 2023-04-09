@@ -12,20 +12,21 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../store/users/action";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../Context/ContextProvider";
 
 
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [handleToken , setHandleToken] = useState(false)
   const toast = useToast();
   const dispatch = useDispatch()
-
+  const {setToken} = useContext(AppContext)
+  const convo = useSelector((store)=>store.conversation)
 
   const initialForm = {
     email: email,
@@ -39,7 +40,7 @@ export default function Login() {
   const redirect = useNavigate();
 
   useEffect(()=>{
-    if (token?.state?.data?.message ==="Token Generated") {
+    if (token?.state?.data?.message ==="Token Generated"){
       sessionStorage.setItem("token", token?.state?.data?.token);
       toast({
         title: "LogIn SuccessFull",
@@ -48,6 +49,7 @@ export default function Login() {
         duration: 4000,
         isClosable: true,
       });
+      setToken(token?.state?.data?.token)
       redirect("/chat")
     } else if(token?.state?.data == "Sorry We Couldnt Find Any Regeistered Email") {
       toast({
