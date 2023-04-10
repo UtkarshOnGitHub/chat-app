@@ -14,15 +14,16 @@ import { getChat } from '../store/chat/action';
 
   
 
-const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
+const SidebarContent = ({ onClose ,user, conversation,currentChat,...rest}) => {
 
     const [active , setActive] = useState("");
     const [close , setClose] = useState(false)
 
 
 
-    const activeStateChange =(id)=>{
+    const activeStateChange =(id,data)=>{
       setActive(id)
+      currentChat(data)
       setClose(true)
     }
 
@@ -37,7 +38,7 @@ const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
           <CloseButton display={{ base: 'flex', md: 'none' }} />
         </Flex>
         {conversation?.map((link) => (
-          <NavItem key={link._id} data={link} active={active} activeStateChange={activeStateChange} currUser = {user} onClose={onClose}/>
+          <NavItem key={link._id} data={link} active={active} activeStateChange={activeStateChange} currUser = {user} onClose={onClose} currentChat={currentChat}/>
         ))}
       </Box>
     );
@@ -48,7 +49,7 @@ const SidebarContent = ({ onClose ,user, conversation,...rest}) => {
 
 
 
-const NavItem = ({ data , currUser , active ,activeStateChange, onClose,...rest }) => {
+const NavItem = ({ data , currUser , active  ,activeStateChange, onClose,...rest }) => {
     const dispatch = useDispatch();
     const [friends , setFriends] = useState({});
     
@@ -69,7 +70,7 @@ const NavItem = ({ data , currUser , active ,activeStateChange, onClose,...rest 
 
     const handleFriends = (id)=>{
         dispatch(getChat(id))
-        activeStateChange(id)
+        activeStateChange(id,data)
     }
     useEffect(()=>{
 

@@ -4,7 +4,7 @@ import SingleMessage from './SingleMessage'
 import axios from 'axios'
 import style from "./Message.module.css"
 
-const Message = ({chat=[] , currUser}) => {
+const Message = ({chat=[] , currUser,handleSocketSend}) => {
 
   const [message , setMessage] = useState("");
   const [state , setState] = useState(false)
@@ -18,6 +18,7 @@ const Message = ({chat=[] , currUser}) => {
     text:message
   }
   const handleSendMessage = async()=>{
+    handleSocketSend(initalState)
     try {
       await axios.post("https://chatappbackend-production-2ce5.up.railway.app/message",initalState)
       setState(!state)
@@ -30,6 +31,8 @@ const Message = ({chat=[] , currUser}) => {
   useEffect(()=>{
     scrollref.current?.scrollIntoView({behaviour:"smooth"})
   },[chat])
+
+  console.log(chat,"chat")
 
   return (
     <>
