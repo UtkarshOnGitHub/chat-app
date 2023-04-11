@@ -38,7 +38,7 @@ export default function Chat() {
   },[chat])
 
   useEffect(() => {
-    socket.current = io("ws://chatappbackend-production-2ce5.up.railway.app:8900");
+    socket.current = io("https://chatappbackend-production-2ce5.up.railway.app/");
     socket.current.on("getMessage", (data) => {
       console.log(data,"data")
       setArrivalMessage({
