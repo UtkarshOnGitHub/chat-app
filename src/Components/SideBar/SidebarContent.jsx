@@ -10,7 +10,8 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChat } from '../store/chat/action';
+import { getChat } from '../../store/chat/action';
+import { singleUserDetails } from '../../api/api';
 
   
 
@@ -35,10 +36,10 @@ const SidebarContent = ({ onClose ,user, conversation,currentChat,...rest}) => {
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
             ChatBap
           </Text>
-          <CloseButton display={{ base: 'flex', md: 'none' }} />
+          <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose}/>
         </Flex>
         {conversation?.map((link) => (
-          <NavItem key={link._id} data={link} active={active} activeStateChange={activeStateChange} currUser = {user} onClose={onClose} currentChat={currentChat}/>
+          <NavItem key={link._id} data={link} active={active} activeStateChange={activeStateChange} currUser = {user} onClose={onClose}/>
         ))}
       </Box>
     );
@@ -58,14 +59,9 @@ const NavItem = ({ data , currUser , active  ,activeStateChange, onClose,...rest
         let friendId = data?.members?.find((e)=>{
             return e != currUser
         })
-        try {
-            axios.get("https://chatappbackend-production-2ce5.up.railway.app/user/"+friendId).then((res)=>{
-                setFriends(res.data)
-            }) 
-        } catch (error) {
-            console.log(error)
-        }
-
+        singleUserDetails(friendId).then((res)=>{
+          setFriends(res?.data)
+        })
     },[])
 
     const handleFriends = (id)=>{

@@ -1,14 +1,13 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+// import { getUser } from '../api/api';
 export const AppContext  = React.createContext();
 
-
-
-
-const getUser = async(data={})=>{
+export const getUser = async(data={})=>{
     return await axios.post("https://chatappbackend-production-2ce5.up.railway.app/user/byToken",data)
 }
+
 
 
 let auth = sessionStorage.getItem("token") || "";

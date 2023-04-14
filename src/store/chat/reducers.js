@@ -1,6 +1,6 @@
 let initialState = {
     data:[],
-    loading:true,
+    loading:false,
     error:false
 }
 
@@ -11,6 +11,12 @@ export const chatReducer =(state=initialState , {type,payload})=>{
                 data:payload,
                 loading:false,
                 error:false
+            }
+        }else if(type=="GET_CHAT_LOADING"){
+            return{            
+                data:payload,
+            loading:true,
+            error:false
             }
         }
         else{

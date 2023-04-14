@@ -1,14 +1,16 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ForgetPassword from '../Components/ForgetPassword'
-import Login from '../Components/Login'
-import Signup from '../Components/Signup'
-import Chat from '../Components/Chat'
+import ForgetPassword from './ForgetPassword'
+import Login from './Login'
+import Signup from './Signup'
+import Chat from './Chat'
+import TabsSection from '../Components/Tabs/Tabs'
+import Message from '../Components/Messages/Message'
 
 const AllRoutes = () => {
   return (
     <Routes>
-        <Route path="/" element={<h1>Home Page</h1>}></Route>
+        <Route path="/" element={<TabsSection/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
         <Route path="/forgetPassword" element={<ForgetPassword/>}></Route>

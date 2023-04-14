@@ -2,7 +2,7 @@ import { Box, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import style from "./singleMessage.module.css"
 import {format} from "timeago.js"
-const SingleMessage = ({text,createdAt,own}) => {
+const SingleMessage = ({text,createdAt,own,...rest}) => {
   return (
     <>
         <Box className={own ? style.messageBody:style.messageBody2}>
