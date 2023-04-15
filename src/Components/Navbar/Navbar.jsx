@@ -20,7 +20,7 @@ const Navbar = ({id}) => {
 
   return (
     <>
-        <Flex h="7.7rem" alignItems={"center"} p="20px" gap={"20px"}>
+        <Flex h="7.7rem" alignItems={"center"} p="10px 20px" gap={"20px"}>
             <Box>
                 <Image h="3rem" w="3rem" borderRadius={"50%"} src="https://wallpapers.com/images/hd/cool-profile-picture-ld8f4n1qemczkrig.jpg"/>
             </Box>

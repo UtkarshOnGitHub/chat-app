@@ -19,11 +19,11 @@ const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
   const handleSendMessage = async () => {
     handleSocketSend(initalState);
     try {
+      setMessage("");
       await axios.post(
         "https://chatappbackend-production-2ce5.up.railway.app/message",
         initalState
       );
-      setMessage("");
       setState(!state);
     } catch (error) {
       console.log(error);
@@ -56,7 +56,7 @@ const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
 
   return (
     <>
-      <Box marginTop={["0", "50px"]} height={"80vh"} position={"relative"}>
+      <Box marginTop={["0", "50px"]} height={"77vh"} position={"relative"}>
         <Box
           h={"88%"}
           w="100%"

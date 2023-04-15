@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react'
 const Allactiveusers = ({conversation,currUser,currentChat}) => {
   return (
     <>
-    <Box height={"677px"} bg="#FAFAFA" paddingTop={"5px"}>
+    <Box height={"610px"} bg="#FAFAFA" paddingTop={"5px"}>
     {
         conversation?.map((link)=>{
             return(

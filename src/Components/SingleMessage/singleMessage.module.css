@@ -1,10 +1,10 @@
 .messageBody{
     display: flex;
     flex-direction: row-reverse;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .messageBody2{
     display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px;
 }
