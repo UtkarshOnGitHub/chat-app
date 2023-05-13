@@ -17,8 +17,18 @@ self.addEventListener("install", (event) => {
 // listen for request
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then((res) => {
-      return fetch(event.request).catch(() => caches.match("offline.html"));
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(event.request).then((response) => {
+        return (
+          response ||
+          fetch(event.request).then((networkResponse) => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          })
+        );
+      }).catch(() => {
+        return caches.match("offline.html");
+      });
     })
   );
 });
