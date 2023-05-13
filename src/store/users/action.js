@@ -1,9 +1,10 @@
 import axios from "axios"
+import API from "../../service/serviceAPI"
 
 
 export const LoginUser =(data={})=>async(dispatch)=>{
     try{
-        let res = await axios.post(`https://chatappbackend-production-835b.up.railway.app/user/login`,data)
+        let res = await axios.post(API+`/user/login`,data)
         dispatch({type:"GET_LOGIN_USER" ,payload:res.data})
     }catch(e){
         console.log(e)

@@ -14,10 +14,11 @@ import {
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../service/serviceAPI';
 
 const setUser = async(data)=>{
     console.log(data)
-    return await axios.post("https://chatappbackend-production-835b.up.railway.app/user/signup", data)
+    return await axios.post(API+"/user/signup", data)
 }
   
 export default function Signup() {

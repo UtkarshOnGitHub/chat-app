@@ -17,10 +17,11 @@ import {
   useStatStyles,
 } from "@chakra-ui/react";
 import axios from 'axios';
+import API from '../service/serviceAPI';
 
 
 const sendOTP = async (data) => {
-  return await axios.post("https://chatappbackend-production-835b.up.railway.app/user/forgetPassword", {
+  return await axios.post(API+"/user/forgetPassword", {
     email: data,
   });
 };

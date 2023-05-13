@@ -1,13 +1,14 @@
 import axios from "axios"
+import API from "../service/serviceAPI"
 
 export const getUser = async(data={})=>{
-    return await axios.post("https://chatappbackend-production-835b.up.railway.app/user/byToken",data)
+    return await axios.post(API+"/user/byToken",data)
 }
 
 
 export const singleUserDetails = async(friendId)=>{
     try {
-        axios.get("https://chatappbackend-production-835b.up.railway.app/user/"+friendId).then((res)=>{
+        axios.get(API+"/user/"+friendId).then((res)=>{
             console.log(res)
             return res
         }) 

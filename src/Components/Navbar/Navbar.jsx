@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getUser, singleUserDetails } from '../../api/api'
 import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import axios from 'axios'
+import API from '../../service/serviceAPI'
 
 
 
@@ -10,7 +11,7 @@ const Navbar = ({id}) => {
     const [data , setData] = useState({})
     useEffect(()=>{
         try {
-            axios.get("https://chatappbackend-production-835b.up.railway.app/user/"+id).then((res)=>{
+            axios.get(API+"/user/"+id).then((res)=>{
                 setData(res.data)
             }) 
         } catch (error) {

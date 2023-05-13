@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { getChat } from '../../store/chat/action';
+import API from '../../service/serviceAPI';
 
 
 const Allchats = ({data,currUser,currentChat,activeUsers}) => {
@@ -18,7 +19,7 @@ const Allchats = ({data,currUser,currentChat,activeUsers}) => {
             return e != currUser
         })
         try {
-            axios.get("https://chatappbackend-production-835b.up.railway.app/user/"+friendId).then((res)=>{
+            axios.get(API+"/user/"+friendId).then((res)=>{
                 setFriends(res.data)
             }) 
         } catch (error) {

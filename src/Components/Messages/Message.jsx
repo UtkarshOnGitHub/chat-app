@@ -5,6 +5,7 @@ import axios from "axios";
 import style from "./Message.module.css";
 import Allchats from "../AllChats/Allchats";
 import LoadingScreen from "react-loading-screen";
+import API from "../../service/serviceAPI";
 
 const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
   const [message, setMessage] = useState("");
@@ -21,7 +22,7 @@ const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
     try {
       setMessage("");
       await axios.post(
-        "https://chatappbackend-production-835b.up.railway.app/message",
+        API+"/message",
         initalState
       );
       setState(!state);
