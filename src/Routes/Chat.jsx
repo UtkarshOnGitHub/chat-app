@@ -40,6 +40,7 @@ export default function Chat() {
   const [message, setMessages] = useState([]);
   const [currentChater, setCurrentChater] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [activeUsers , setActiveUsers] = useState([])
   const tabsRef = useRef(null);
 
   useEffect(() => {
@@ -47,10 +48,9 @@ export default function Chat() {
   }, [chat]);
 
   useEffect(() => {
-    socket.current = io("https://chatappbackend-production-2ce5.up.railway.app/");
-    // socket.current = io("http://localhost:8900");
+    // socket.current = io("https://chatappbackend-production-2ce5.up.railway.app/");
+    socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
-      console.log(data, "data");
       setArrivalMessage({
         conversationId: data.conversationId,
         senderId: data.senderId,
@@ -63,9 +63,14 @@ export default function Chat() {
   useEffect(() => {
     socket.current.emit("addUser", token._id);
     socket.current.on("getUsers", (users) => {
-      console.log(users);
+      setActiveUsers(users)
     });
   }, [token]);
+
+  useEffect(()=>{
+
+  },[])
+
 
   useEffect(() => {
     arrivalMessage &&
@@ -105,27 +110,7 @@ export default function Chat() {
     setActiveTab(index);
   };
   useEffect(() => {}, [currentChat]);
-
-
-  // if(chat?.loading){
-  //   return(
-  //     <>
-  //            <Box h="100vh" display={"flex"} justifyContent={"center"} alignContent={"center"}>
-  //       <LoadingScreen
-  //         loading={true}
-  //         bgColor="rgba(255,255,255,0.8)"
-  //         spinnerColor="#9ee5f8"
-  //         textColor="#676767"
-  //         logoSrc=""
-  //         text=""
-  //       >
-  //         {" "}
-  //       </LoadingScreen>
-  //       </Box> 
-  //     </>
-  //   )
-  // }
-
+ 
 
   if (convo?.loading) {
     return (
@@ -185,6 +170,7 @@ export default function Chat() {
           <TabPanel p="0">
             <Box ml={{ base: 0, md: 60 }} p="0">
               <Allactiveusers
+                activeUsers={activeUsers}
                 conversation={convo?.data}
                 currUser={token._id}
                 currentChat={currentChat}
