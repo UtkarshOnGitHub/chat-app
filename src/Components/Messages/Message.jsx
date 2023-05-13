@@ -21,7 +21,7 @@ const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
     try {
       setMessage("");
       await axios.post(
-        "https://chatappbackend-production-2ce5.up.railway.app/message",
+        "https://chatappbackend-production-835b.up.railway.app/message",
         initalState
       );
       setState(!state);

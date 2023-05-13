@@ -18,7 +18,7 @@ const Allchats = ({data,currUser,currentChat,activeUsers}) => {
             return e != currUser
         })
         try {
-            axios.get("https://chatappbackend-production-2ce5.up.railway.app/user/"+friendId).then((res)=>{
+            axios.get("https://chatappbackend-production-835b.up.railway.app/user/"+friendId).then((res)=>{
                 setFriends(res.data)
             }) 
         } catch (error) {

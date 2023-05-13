@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const AppContext  = React.createContext();
 
 export const getUser = async(data={})=>{
-    return await axios.post("https://chatappbackend-production-2ce5.up.railway.app/user/byToken",data)
+    return await axios.post("https://chatappbackend-production-835b.up.railway.app/user/byToken",data)
 }
 
 

@@ -10,7 +10,7 @@ const Navbar = ({id}) => {
     const [data , setData] = useState({})
     useEffect(()=>{
         try {
-            axios.get("https://chatappbackend-production-2ce5.up.railway.app/user/"+id).then((res)=>{
+            axios.get("https://chatappbackend-production-835b.up.railway.app/user/"+id).then((res)=>{
                 setData(res.data)
             }) 
         } catch (error) {
