@@ -48,8 +48,8 @@ export default function Chat() {
   }, [chat]);
 
   useEffect(() => {
-    // socket.current = io("https://chatappbackend-production-2ce5.up.railway.app/");
-    socket.current = io("http://localhost:8900");
+    socket.current = io("https://chatappbackend-production-2ce5.up.railway.app/");
+    // socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         conversationId: data.conversationId,

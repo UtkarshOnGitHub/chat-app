@@ -34,7 +34,6 @@ const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
     scrollref.current?.scrollIntoView({ behaviour: "smooth" });
   }, [chat]);
 
-  console.log(chat)
   if(loading){
     return(
       <>

@@ -1,6 +1,6 @@
 import { Avatar, AvatarBadge, Box, Flex, Image, Text } from '@chakra-ui/react'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { getChat } from '../../store/chat/action';
 
@@ -10,6 +10,7 @@ const Allchats = ({data,currUser,currentChat,activeUsers}) => {
     const [isOnline , setIsOnline] = useState(false)
     const dispatch = useDispatch();
     const [friends , setFriends] = useState({});
+    const onlineRef = useRef(null)
 
 
     useEffect(()=>{
@@ -27,20 +28,17 @@ const Allchats = ({data,currUser,currentChat,activeUsers}) => {
     },[])
 
 
-    useEffect(()=>{
-        activeUsers.find((e)=>{
-            if(e.userId == friends?._id){
-                setIsOnline(true)
-            }
-        })
-    },[activeUsers])
+    useEffect(() => {
+        const isActiveUser = activeUsers.some(user => user.userId === friends?._id);
+        setIsOnline(isActiveUser);
+      }, [activeUsers,friends?._id]);
 
 
     const handleFriends = (id,data)=>{
         dispatch(getChat(id))
         currentChat(data)
     }
-    console.log(activeUsers,"Active")
+
   return (
     <>
         <Flex h="5rem" w="full" alignItems={"center"} p="0 20px" gap={"30px"} marginTop={"20px"} onClick={()=>handleFriends(data?._id,data)}>
