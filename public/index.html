@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="Chat-Bap"
-      content="Chat Got More Secure"
-    />
+    <meta name="Chat-Bap" content="Chat Got More Secure" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -40,14 +37,21 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      if('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./serviceWorker.js').then((reg) => {
-            console.log('Worker Registered')
-          }).catch((err) => {
-            console.log('Error in service worker registration.')
-          })
-        })
+      // if('serviceWorker' in navigator) {
+      //   window.addEventListener('load', () => {
+      //     navigator.serviceWorker.register('./serviceWorker.js').then((reg) => {
+      //       console.log('Worker Registered')
+      //     }).catch((err) => {
+      //       console.log('Error in service worker registration.')
+      //     })
+      //   })
+      // }
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          registrations.forEach((registration) => {
+            registration.unregister();
+          });
+        });
       }
     </script>
   </body>
