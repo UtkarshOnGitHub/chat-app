@@ -51,8 +51,8 @@ export default function Chat() {
 
 
   useEffect(() => {
-    // socket.current = io("https://chatappbackend-production-2ce5.up.railway.app");
-    socket.current = io("http://localhost:8900");
+    socket.current = io("https://chatappbackend-production-2ce5.up.railway.app");
+    // socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         conversationId: data.conversationId,
@@ -115,7 +115,7 @@ export default function Chat() {
     setActiveTab(index);
 
   };
-  useEffect(() => {}, [currentChat]);
+  useEffect(() => {}, [currentChat,activeTab]);
 
  
 
