@@ -5,11 +5,11 @@ import { Box } from '@chakra-ui/react'
 const Allactiveusers = ({conversation,currUser,currentChat,activeUsers}) => {
   return (
     <>
-    <Box height={"610px"} bg="#FAFAFA" paddingTop={"5px"}>
+    <Box height={"530px"} bg="#FAFAFA" paddingTop={"5px"} overflow={"scroll"} overflowX={"hidden"} overflowY={"auto"}>
     {
-        conversation?.map((link)=>{
+        conversation?.map((link,idx)=>{
             return(
-                <Allchats key={link._id} data={link} currUser={currUser} activeUsers={activeUsers} currentChat={currentChat}/>
+                <Allchats key={link._id} idx={idx} data={link} currUser={currUser} activeUsers={activeUsers} currentChat={currentChat}/>
             )
         })
     }

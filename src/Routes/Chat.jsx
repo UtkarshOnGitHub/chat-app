@@ -28,6 +28,7 @@ import Allactiveusers from "../Components/Allusers/Allactiveusers";
 
 import LoadingScreen from "react-loading-screen";
 import Navbar from "../Components/Navbar/Navbar";
+import AllUsers from "./AllUsers";
 
 export default function Chat() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,14 +43,16 @@ export default function Chat() {
   const [activeTab, setActiveTab] = useState(0);
   const [activeUsers , setActiveUsers] = useState([])
   const tabsRef = useRef(null);
+  const [reRenderBool  , setReRenderBool] = useState(false)
 
   useEffect(() => {
     setMessages(chat?.data);
   }, [chat]);
 
+
   useEffect(() => {
-    socket.current = io("https://chatappbackend-production-2ce5.up.railway.app");
-    // socket.current = io("http://localhost:8900");
+    // socket.current = io("https://chatappbackend-production-2ce5.up.railway.app");
+    socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         conversationId: data.conversationId,
@@ -69,8 +72,7 @@ export default function Chat() {
 
   useEffect(()=>{
 
-  },[])
-
+  },[reRenderBool])
 
   useEffect(() => {
     arrivalMessage &&
@@ -107,9 +109,14 @@ export default function Chat() {
   };
 
   const handleTabClick = (index) => {
+    if(index==1){
+      setReRenderBool(!reRenderBool)
+    }
     setActiveTab(index);
+
   };
   useEffect(() => {}, [currentChat]);
+
  
 
   if (convo?.loading) {
@@ -130,6 +137,7 @@ export default function Chat() {
       </>
     );
   }
+  
 
   return (
     <Box minH="100vh" bg="#EFEBE9">
@@ -189,39 +197,14 @@ export default function Chat() {
               />
             </Box>
           </TabPanel>
-          <TabPanel>
-            <p>three!</p>
+          {/* ------------------------ */}
+          <TabPanel p="0">
+            <Box ml={{ base: 0, md: 60 }} p="0">
+              <AllUsers currUser={token._id}/>
+            </Box>
           </TabPanel>
         </TabPanels>
       </Tabs>
     </Box>
   );
 }
-
-// Mobile Nav
-const MobileNav = ({ onOpen, ...rest }) => {
-  return (
-    <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 24 }}
-      height="20"
-      alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
-      borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      justifyContent="flex-start"
-      {...rest}
-    >
-      {/* <IconButton
-        variant="outline"
-        onClick={onOpen}
-        aria-label="open menu"
-        icon={<FiMenu />}
-      /> */}
-
-      <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        ChatBap
-      </Text>
-    </Flex>
-  );
-};

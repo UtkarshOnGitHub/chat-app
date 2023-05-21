@@ -6,13 +6,12 @@ import { getChat } from '../../store/chat/action';
 import API from '../../service/serviceAPI';
 
 
-const Allchats = ({data,currUser,currentChat,activeUsers}) => {
+const Allchats = ({data,currUser,currentChat,activeUsers,idx}) => {
 
     const [isOnline , setIsOnline] = useState(false)
     const dispatch = useDispatch();
     const [friends , setFriends] = useState({});
-    const onlineRef = useRef(null)
-
+ 
 
     useEffect(()=>{
         let friendId = data?.members?.find((e)=>{
@@ -34,7 +33,6 @@ const Allchats = ({data,currUser,currentChat,activeUsers}) => {
         setIsOnline(isActiveUser);
       }, [activeUsers,friends?._id]);
 
-
     const handleFriends = (id,data)=>{
         dispatch(getChat(id))
         currentChat(data)
@@ -43,7 +41,7 @@ const Allchats = ({data,currUser,currentChat,activeUsers}) => {
   return (
     <>
         <Flex h="5rem" w="full" alignItems={"center"} p="0 20px" gap={"30px"} marginTop={"20px"} onClick={()=>handleFriends(data?._id,data)}>
-            <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVmqw3Cr7IQM-oR1ebavbVUJ7x5xkvYBPrBZEEs2IqGDpPuNlXQIQUHpRo3wn88ZEKiEs&usqp=CAU">
+            <Avatar src={`https://randomuser.me/api/portraits/men/${idx}.jpg`}>
                 {isOnline ? <AvatarBadge boxSize='1.25em' bg='green.500' /> : <AvatarBadge borderColor='papayawhip' bg='tomato' boxSize='1.25em' />}
             </Avatar>
             <Box>
