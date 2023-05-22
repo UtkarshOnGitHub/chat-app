@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import API from '../service/serviceAPI';
 
 const setUser = async(data)=>{
-    console.log(data)
     return await axios.post(API+"/user/signup", data)
 }
   
@@ -44,9 +43,16 @@ export default function Signup() {
                     isClosable: true,
                 })
                 navigate("/login")
+            }else if(res.data=="Enter a valid email"){
+              toast({
+                title: 'Enter a valid email',
+                status: 'error',
+                duration: 4000,
+                isClosable: true,
+              })
             }else{
                 toast({
-                    title: 'Something Went Wrong ',
+                    title: 'Something Went Wrong',
                     status: 'error',
                     duration: 4000,
                     isClosable: true,

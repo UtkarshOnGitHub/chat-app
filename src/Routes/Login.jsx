@@ -33,9 +33,6 @@ export default function Login() {
     password: password,
   };
 
-
-
-
   const token = useSelector((store)=>store.user)
   const redirect = useNavigate();
 

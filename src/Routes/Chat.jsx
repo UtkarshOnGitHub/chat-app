@@ -117,9 +117,9 @@ export default function Chat() {
   };
   useEffect(() => {}, [currentChat,activeTab]);
 
- 
+ console.log(convo)
 
-  if (convo?.loading) {
+  if (convo?.loading){
     return (
       <>
       <Box h="100vh" display={"flex"} justifyContent={"center"} alignContent={"center"}>

@@ -23,7 +23,7 @@ const Navbar = ({id}) => {
     <>
         <Flex h="7.7rem" alignItems={"center"} p="10px 20px" gap={"20px"}>
             <Box>
-                <Image h="3rem" w="3rem" borderRadius={"50%"} src="https://wallpapers.com/images/hd/cool-profile-picture-ld8f4n1qemczkrig.jpg"/>
+                <Image h="3rem" w="3rem" borderRadius={"50%"} src={`https://randomuser.me/api/portraits/men/${2}.jpg`}/>
             </Box>
             <Box>
                 <Text fontSize={"24px"} fontWeight={500}>{data?.username}</Text>
