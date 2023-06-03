@@ -51,8 +51,8 @@ export default function Chat() {
 
 
   useEffect(() => {
-    // socket.current = io("https://chat-app-backend-pmiq.onrender.com");
-    socket.current = io("http://localhost:8900");
+    socket.current = io("https://chat-app-backend-pmiq.onrender.com");
+    // socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         conversationId: data.conversationId,
