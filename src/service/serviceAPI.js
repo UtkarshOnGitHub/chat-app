@@ -1,7 +1,7 @@
 // const API = "https://chatappbackend-production-2ce5.up.railway.app"
 
-const API = "https://chat-app-backend-pmiq.onrender.com"
+// const API = "https://chat-app-backend-pmiq.onrender.com"
 
-// const API = "http://localhost:8080"
+const API = "http://localhost:8080"
 
 export default API

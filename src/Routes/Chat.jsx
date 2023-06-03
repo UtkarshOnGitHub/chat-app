@@ -32,7 +32,7 @@ import AllUsers from "./AllUsers";
 
 export default function Chat() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { token } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
   const dispatch = useDispatch();
   const chat = useSelector((store) => store.chat);
   const convo = useSelector((store) => store.conversation);
@@ -51,8 +51,8 @@ export default function Chat() {
 
 
   useEffect(() => {
-    socket.current = io("https://chat-app-backend-pmiq.onrender.com");
-    // socket.current = io("http://localhost:8900");
+    // socket.current = io("https://chat-app-backend-pmiq.onrender.com");
+    socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         conversationId: data.conversationId,
@@ -64,11 +64,11 @@ export default function Chat() {
   }, []);
 
   useEffect(() => {
-    socket.current.emit("addUser", token._id);
+    socket.current.emit("addUser", userData._id);
     socket.current.on("getUsers", (users) => {
       setActiveUsers(users)
     });
-  }, [token]);
+  }, [userData]);
 
   useEffect(()=>{
 
@@ -81,23 +81,23 @@ export default function Chat() {
   }, [arrivalMessage, currentChater]);
 
   useEffect(() => {
-    dispatch(getConversations(token?._id));
-  }, [token._id]);
+    dispatch(getConversations(userData?._id));
+  }, [userData._id]);
 
   const receiverId = currentChater?.members.find(
-    (member) => member !== token._id
+    (member) => member !== userData._id
   );
 
   const handleSocketSend = (value) => {
     socket.current.emit("sendMessage", {
       conversationId: value.conversationId,
-      senderId: token._id,
+      senderId: userData._id,
       receiverId,
       text: value.text,
     });
     setArrivalMessage({
       conversationId: value.conversationId,
-      senderId: token._id,
+      senderId: userData._id,
       text: value.text,
       createdAt: Date.now(),
     });
@@ -141,7 +141,7 @@ export default function Chat() {
 
   return (
     <Box minH="100vh" bg="#EFEBE9">
-      <Navbar  id={token._id}/>
+      <Navbar  id={userData._id}/>
       <Tabs
         position="relative"
         variant="unstyled"
@@ -180,7 +180,7 @@ export default function Chat() {
               <Allactiveusers
                 activeUsers={activeUsers}
                 conversation={convo?.data}
-                currUser={token._id}
+                currUser={userData._id}
                 currentChat={currentChat}
               />
             </Box>
@@ -192,7 +192,7 @@ export default function Chat() {
                 chat={message}
                 handleSocketSend={handleSocketSend}
                 conversation={convo?.data}
-                currUser={token._id}
+                currUser={userData._id}
                 loading ={chat?.loading}
               />
             </Box>
@@ -200,7 +200,7 @@ export default function Chat() {
           {/* ------------------------ */}
           <TabPanel p="0">
             <Box ml={{ base: 0, md: 60 }} p="0">
-              <AllUsers currUser={token._id}/>
+              <AllUsers currUser={userData._id}/>
             </Box>
           </TabPanel>
         </TabPanels>

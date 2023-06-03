@@ -15,10 +15,11 @@ let auth = sessionStorage.getItem("token") || "";
 
 const ContextProvider = ({children}) => {
     const [token , setToken] = useState("");
+    const [userData , setUserData]= useState({})
     useEffect(()=>{
         if(token!= ""){
             getUser({token:token}).then((res)=>{
-                setToken(res.data)
+                setUserData(res.data)
             })
         }
         else{
@@ -29,7 +30,7 @@ const ContextProvider = ({children}) => {
 
     return (
         <div>
-            <AppContext.Provider value={{token,setToken}}>
+            <AppContext.Provider value={{token,setToken,userData}}>
                 {children}
             </AppContext.Provider>
         </div>
