@@ -21,7 +21,7 @@ const Navbar = ({id}) => {
 
   return (
     <>
-        <Flex h="7.7rem" alignItems={"center"} p="10px 20px" gap={"20px"}>
+        <Flex alignItems={"center"} p="20px 20px" gap={"20px"}>
             <Box>
                 <Image h="3rem" w="3rem" borderRadius={"50%"} src={`https://randomuser.me/api/portraits/men/${2}.jpg`}/>
             </Box>

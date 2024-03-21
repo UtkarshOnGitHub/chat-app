@@ -11,12 +11,13 @@ import {
   Image,
   useToast,
 } from "@chakra-ui/react";
-
+import img from "../assets/main-img.jpg"
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../store/users/action";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/ContextProvider";
+
 
 
 
@@ -80,8 +81,9 @@ export default function Login() {
         <Image
           alt={"Login Image"}
           objectFit={"cover"}
-          src={
-            "https://newevolutiondesigns.com/images/freebies/cool-4k-wallpaper-1.jpg"
+          className="loginImg"
+          src={img
+            // "https://newevolutiondesigns.com/images/freebies/cool-4k-wallpaper-1.jpg"
           }
         />
       </Flex>

@@ -140,7 +140,7 @@ export default function Chat() {
   
 
   return (
-    <Box minH="100vh" bg="#EFEBE9">
+    <Box bg="#EFEBE9">
       <Navbar  id={userData._id}/>
       <Tabs
         position="relative"

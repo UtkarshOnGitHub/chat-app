@@ -40,7 +40,7 @@ const Allchats = ({data,currUser,currentChat,activeUsers,idx}) => {
 
   return (
     <>
-        <Flex h="5rem" w="full" alignItems={"center"} p="0 20px" gap={"30px"} marginTop={"20px"} onClick={()=>handleFriends(data?._id,data)}>
+        <Flex h="5rem" w="full" alignItems={"center"} p="0 20px" gap={"30px"} marginBottom={"20px"} onClick={()=>handleFriends(data?._id,data)}>
             <Avatar src={`https://randomuser.me/api/portraits/men/${idx}.jpg`}>
                 {isOnline ? <AvatarBadge boxSize='1.25em' bg='green.500' /> : <AvatarBadge borderColor='papayawhip' bg='tomato' boxSize='1.25em' />}
             </Avatar>

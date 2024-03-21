@@ -17,7 +17,7 @@ const AllUsers = ({currUser}) => {
     console.log(allUser)
   return (
     <>
-        <Box height={"530px"} bg="#FAFAFA" padding={"20px"} overflow={"scroll"} overflowX={"hidden"} overflowY={"auto"}>
+        <Box bg="#FAFAFA" padding={"20px"} overflow={"scroll"} overflowX={"hidden"} overflowY={"auto"}>
             {allUser?.map((e,idx)=>{
                 return <ShowSingleUser key={e._id} user={e} currUser={currUser} idx={idx}/>
                 }
