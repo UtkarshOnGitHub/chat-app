@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react'
 const Allactiveusers = ({conversation,currUser,currentChat,activeUsers}) => {
   return (
     <>
-    <Box height={"80vh"} bg="#FAFAFA" paddingTop={"5px"} overflow={"scroll"} overflowX={"hidden"} overflowY={"auto"}>
+    <Box bg="#FAFAFA" paddingTop={"5px"} overflow={"scroll"} overflowX={"hidden"} overflowY={"auto"}>
     {
         conversation?.map((link,idx)=>{
             return(

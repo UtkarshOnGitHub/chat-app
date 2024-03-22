@@ -67,7 +67,7 @@ const Message = ({ chat = [], currUser, handleSocketSend, loading }) => {
 
   return (
     <>
-      <Box marginTop={["0", "50px"]} height={"76vh"} position={"relative"}>
+      <Box marginTop={["0", "50px"]} height={"90vh"} position={"relative"}>
         <Box
           // h={"547px"}
           h="100%"

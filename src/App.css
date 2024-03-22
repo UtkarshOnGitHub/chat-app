@@ -3,9 +3,9 @@
 }
 .main{
   height: 100vh;
-  overflow: scroll;
+  /* overflow: scroll;
   overflow-y: hidden;
-  overflow-x: hidden;
+  overflow-x: hidden; */
 }
 
 .App-logo {

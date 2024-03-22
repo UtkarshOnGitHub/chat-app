@@ -21,7 +21,7 @@ import { AppContext } from "../Context/ContextProvider";
 import { getConversations } from "../store/conversation/action";
 import { io } from "socket.io-client";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
-import { FaUserFriends } from "react-icons/fa";
+import { FaUser, FaUserFriends, FaUsersCog, FaWrench } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
 
 import Allactiveusers from "../Components/Allusers/Allactiveusers";
@@ -29,6 +29,7 @@ import Allactiveusers from "../Components/Allusers/Allactiveusers";
 import LoadingScreen from "react-loading-screen";
 import Navbar from "../Components/Navbar/Navbar";
 import AllUsers from "./AllUsers";
+import SocialProfileWithImage from "../Components/Profile/SocialProfileWithImage";
 
 export default function Chat() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -141,7 +142,7 @@ export default function Chat() {
 
   return (
     <Box bg="#EFEBE9">
-      <Navbar  id={userData._id}/>
+      {/* <Navbar  id={userData._id}/> */}
       <Tabs
         position="relative"
         variant="unstyled"
@@ -149,20 +150,27 @@ export default function Chat() {
         index={activeTab}
         ref={tabsRef}
       >
-        <TabList display={"flex"} justifyContent={"space-between"}>
+        <TabList display={"flex"} height={"10vh"} justifyContent={"space-between"} position= {'sticky'} top={'0'} bg="#EFEBE9" zIndex="11111111" padding ={"12px 0"}>
           <Tab w="100%" fontSize={"30px"} onClick={() => handleTabClick(0)}>
             <Box>
               <FaUserFriends />
             </Box>
           </Tab>
-          <Tab w="100%" isDisabled={chat?.data?.length==0?true:false} fontSize={"30px"} onClick={() => handleTabClick(1)}>
+          <Tab w="100%" isDisabled={chat?.data?.length==0?true:false} fontSize={"28px"} onClick={() => handleTabClick(1)}>
             <Box>
               <BsFillChatLeftTextFill />
             </Box>
           </Tab>
           <Tab w="100%" fontSize={"30px"} onClick={() => handleTabClick(2)}>
             <Box>
-              <FaUserCheck />
+            <FaUsersCog />
+            </Box>
+          </Tab>
+          <Tab w="100%" fontSize={"26px"} onClick={() => handleTabClick(3)}>
+            <Box>
+              {/* <FaUser/> */}
+              
+              <FaWrench />
             </Box>
           </Tab>
         </TabList>
@@ -201,6 +209,12 @@ export default function Chat() {
           <TabPanel p="0">
             <Box ml={{ base: 0, md: 60 }} p="0">
               <AllUsers currUser={userData._id}/>
+            </Box>
+          </TabPanel>
+          <TabPanel p="0">
+            <Box ml={{ base: 0, md: 60 }} p="0" h="90vh" bg={"white"}>
+              {/*  */}
+              <SocialProfileWithImage id={userData._id}/>
             </Box>
           </TabPanel>
         </TabPanels>
